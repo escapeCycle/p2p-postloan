@@ -1,13 +1,8 @@
 package com.lljr.loan.common;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /**
  *
  */
-@Getter
-@Setter
 public enum ResponseCode {
     SUCCESS(200),
     FAIL(400),
@@ -16,6 +11,10 @@ public enum ResponseCode {
     INTERNAL_SERVER_ERROR(500);
 
     public int code;
+
+    public int getCode() {
+        return code;
+    }
 
     ResponseCode(int code) {
         this.code = code;
