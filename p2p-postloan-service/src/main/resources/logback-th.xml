@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+
+    <!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+    <property name="default_pattern" value="%d [%t -%X{traceNo}] %-5p [%c %L] - %m%n"></property>
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">-->
+        <encoder>
+            <!--<pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n</pattern>-->
+            <charset>UTF-8</charset>
+            <pattern>${default_pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>/usr/local/data/logs/p2p-postloan-service.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/usr/local/data/logs/p2p-postloan-service.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${default_pattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level>
+        </filter>
+        <file>/usr/local/data/logs/p2p-postloan-service-debug.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/usr/local/data/logs/p2p-postloan-service-debug.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>${default_pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 日志级别 -->
+    <root>
+        <level value="info" />
+        <appender-ref ref="console" />
+        <appender-ref ref="FILE-INFO" />
+    </root>
+
+</configuration>
